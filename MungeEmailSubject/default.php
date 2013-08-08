@@ -26,7 +26,9 @@ class MungeEmailSubjectPlugin extends Gdn_Plugin {
         $Activity = $Sender->EventArguments['Activity'];
 
         // Forum name ...
-        $subj = preg_replace( '/] .*/', '] ', $Email->PhpMailer->Subject); 
+        $subj = preg_replace( '/] .*/', '] ', $Email->PhpMailer->Subject);
+        // ToDo: This assumes that the subject line contains [FORUMNAME], which 
+        // is not necessarily the case for all forums. FIX
 
         if ( $Activity->ActivityTypeID == 17 ) { # New post
         // ToDo - having this in here by ID number is anathema. FIX
