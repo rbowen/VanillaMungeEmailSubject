@@ -28,7 +28,8 @@ class MungeEmailSubjectPlugin extends Gdn_Plugin {
         // Forum name ...
         $subj = preg_replace( '/] .*/', '] ', $Email->PhpMailer->Subject); 
 
-        if ( $Activity->ActivityTypeID == 17 ) { # New post ... easy
+        if ( $Activity->ActivityTypeID == 17 ) { # New post
+        // ToDo - having this in here by ID number is anathema. FIX
 
             preg_match( '/^.*discussion\/(\d+)/', $Activity->Route, $matches );
             $DiscussionID = $matches[1];
@@ -40,7 +41,8 @@ class MungeEmailSubjectPlugin extends Gdn_Plugin {
 
         } 
         
-        elseif ( $Activity->ActivityTypeID == 18 ) { # Comment ...  harder
+        elseif ( $Activity->ActivityTypeID == 18 ) { # Comment
+        // ToDo - having this in here by ID number is anathema. FIX
             $title = 'COMMENT';
             $Email->Subject( $subj . ' ' . $title);
 
