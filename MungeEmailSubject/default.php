@@ -41,6 +41,10 @@ class MungeEmailSubjectPlugin extends Gdn_Plugin {
 
             $Email->Subject( $subj . ' ' . $Discussion->Name );
 
+            $MessageID = ereg_replace("[^A-Za-z0-9-]", "",
+                $subj . $DiscussionID );
+            $Email->PhpMailer->MessageID = "<$MessageID>";
+
         } 
         
         elseif ( $Activity->ActivityTypeID == 18 || # NewComment
@@ -63,6 +67,10 @@ class MungeEmailSubjectPlugin extends Gdn_Plugin {
             $Discussion = $DiscussionModel->GetID($DiscussionID);
 
             $Email->Subject( 'Re: ' . $subj . ' ' . $Discussion->Name );
+
+            $MessageID = ereg_replace("[^A-Za-z0-9-]", "",
+                $subj . $DiscussionID );
+            $Email->PhpMailer->addCustomHeader("In-Reply-To: <$MessageID>");
         }
 
         else {
