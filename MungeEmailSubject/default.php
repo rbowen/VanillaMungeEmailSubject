@@ -4,7 +4,7 @@
 $PluginInfo['MungeEmailSubject'] = array(
    'Name' => 'MungeEmailSubject',
    'Description' => 'Use the forum post title, rather than rubbish, for the email subject',
-   'Version' => '0.1',
+   'Version' => '0.2',
    'Author' => "Rich Bowen",
    'AuthorEmail' => 'rbowen@rcbowen.com',
    'AuthorUrl' => 'http://rcbowen.com',
@@ -27,11 +27,11 @@ class MungeEmailSubjectPlugin extends Gdn_Plugin {
 
         // Forum name ...
         $subj = preg_replace( '/] .*/', '] ', $Email->PhpMailer->Subject);
-        // ToDo: This assumes that the subject line contains [FORUMNAME], which 
+        // TODO: This assumes that the subject line contains [FORUMNAME], which 
         // is not necessarily the case for all forums. FIX
 
-        if ( $Activity->ActivityTypeID == 17 ) { # New post
-        // ToDo - having this in here by ID number is anathema. FIX
+        if ( $Activity->ActivityTypeID == 17 ) { # NewDiscussion
+        // TODO - having this in here by ID number is anathema. FIX
 
             preg_match( '/^.*discussion\/(\d+)/', $Activity->Route, $matches );
             $DiscussionID = $matches[1];
@@ -43,8 +43,12 @@ class MungeEmailSubjectPlugin extends Gdn_Plugin {
 
         } 
         
-        elseif ( $Activity->ActivityTypeID == 18 ) { # Comment
-        // ToDo - having this in here by ID number is anathema. FIX
+        elseif ( $Activity->ActivityTypeID == 18 || # NewComment
+                 $Activity->ActivityTypeID == 19 || # DiscussionComment
+                 $Activity->ActivityTypeID == 10    # ActivityComment
+               ) {
+        // TODO - having this in here by ID number is anathema. FIX
+
             $title = 'COMMENT';
             $Email->Subject( $subj . ' ' . $title);
 
