@@ -9,6 +9,12 @@ Other activity types are not handled, but could be added trivially, once you see
 
 While the question of how to do this appears numerous places in the Vanilla support forum, I wasn't able to find any actual solutions to the problem.
 
+## TODO
+
+* Add thread headers to messages from the same discussion
+* Handle activity types that aren't yet handled
+* Use ActivityType name rather than ID number, which is evil
+
 ## Contact
 
 * Rich Bowen
