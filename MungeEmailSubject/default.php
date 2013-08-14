@@ -48,8 +48,7 @@ class MungeEmailSubjectPlugin extends Gdn_Plugin {
         } 
         
         elseif ( $Activity->ActivityTypeID == 18 || # NewComment
-                 $Activity->ActivityTypeID == 19 || # DiscussionComment
-                 $Activity->ActivityTypeID == 10    # ActivityComment
+                 $Activity->ActivityTypeID == 19    # DiscussionComment
                ) {
         // TODO - having this in here by ID number is anathema. FIX
 
